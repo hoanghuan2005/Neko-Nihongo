@@ -1,2 +1,0 @@
-# Neko-Nihongo
-Learning Application
