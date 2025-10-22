@@ -1,14 +1,21 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/HomePage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import LearnPage from "./pages/LearnPage.jsx";
+import PetZonePage from "./pages/PetZonePage.jsx";
+import ChatPage from "./pages/ChatPage.jsx";
+import SignupPage from "./pages/SignupPage.jsx";
 
 function App() {
   return (
-    <div className="h-screen flex items-center justify-center bg-gradient-to-r from-indigo-500 to-pink-500">
-      <h1 className="text-5xl font-bold text-white drop-shadow-lg">
-        Hello Tailwind + Vite 💖
-      </h1>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/learn" element={<LearnPage />} />
+      <Route path="/pet" element={<PetZonePage />} />
+      <Route path="/chat" element={<ChatPage />} />
+      <Route path="/signup" element={<SignupPage />} />
+    </Routes>
   );
 }
 

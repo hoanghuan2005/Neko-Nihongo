@@ -1,0 +1,88 @@
+// src/data/lessons.js
+
+export const lessons = [
+  {
+    id: 1,
+    title: "Greetings",
+    level: "Beginner",
+    category: "Vocabulary",
+    image: "/images/lesson-greetings.jpg",
+    progress: 70,
+    description: "Learn how to greet people in Japanese.",
+    words: [
+      { jp: "こんにちは", romaji: "Konnichiwa", en: "Hello" },
+      { jp: "おはよう", romaji: "Ohayou", en: "Good morning" },
+      { jp: "こんばんは", romaji: "Konbanwa", en: "Good evening" },
+    ],
+  },
+  {
+    id: 2,
+    title: "Numbers",
+    level: "Beginner",
+    category: "Vocabulary",
+    image: "/images/lesson-numbers.jpg",
+    progress: 40,
+    description: "Basic Japanese numbers and counting.",
+    words: [
+      { jp: "いち", romaji: "Ichi", en: "One" },
+      { jp: "に", romaji: "Ni", en: "Two" },
+      { jp: "さん", romaji: "San", en: "Three" },
+    ],
+  },
+  {
+    id: 3,
+    title: "Colors",
+    level: "Beginner",
+    category: "Vocabulary",
+    image: "/images/lesson-colors.jpg",
+    progress: 20,
+    description: "Learn colors and how to describe them.",
+    words: [
+      { jp: "あか", romaji: "Aka", en: "Red" },
+      { jp: "あお", romaji: "Ao", en: "Blue" },
+      { jp: "みどり", romaji: "Midori", en: "Green" },
+    ],
+  },
+  {
+    id: 4,
+    title: "Animals",
+    level: "Beginner",
+    category: "Vocabulary",
+    image: "/images/lesson-animals.jpg",
+    progress: 60,
+    description: "Names of common animals in Japanese.",
+    words: [
+      { jp: "ねこ", romaji: "Neko", en: "Cat" },
+      { jp: "いぬ", romaji: "Inu", en: "Dog" },
+      { jp: "とり", romaji: "Tori", en: "Bird" },
+    ],
+  },
+  {
+    id: 5,
+    title: "Food",
+    level: "Beginner",
+    category: "Vocabulary",
+    image: "/images/lesson-food.jpg",
+    progress: 10,
+    description: "Learn words for common Japanese foods.",
+    words: [
+      { jp: "すし", romaji: "Sushi", en: "Sushi" },
+      { jp: "ごはん", romaji: "Gohan", en: "Rice" },
+      { jp: "ラーメン", romaji: "Rāmen", en: "Ramen" },
+    ],
+  },
+  {
+    id: 6,
+    title: "Family",
+    level: "Beginner",
+    category: "Vocabulary",
+    image: "/images/lesson-family.jpg",
+    progress: 30,
+    description: "Learn how to talk about your family.",
+    words: [
+      { jp: "おとうさん", romaji: "Otousan", en: "Father" },
+      { jp: "おかあさん", romaji: "Okaasan", en: "Mother" },
+      { jp: "いもうと", romaji: "Imouto", en: "Younger sister" },
+    ],
+  },
+];
