@@ -1,45 +1,51 @@
-// src/pages/Chat.jsx
 import React, { useState } from "react";
+import { friends } from "../data/friends";
 import BottomNav from "../components/BottomNav";
+import ChatRoom from "./ChatRoom";
 
 export default function ChatPage() {
-  const [messages, setMessages] = useState([
-    { id: 1, who: "neko", text: "こんにちは！今日は何を学びますか？" },
-    { id: 2, who: "user", text: "I want to learn some basic Japanese phrases." },
-    { id: 3, who: "neko", text: "「ありがとう」は 'Arigatou' と言います。" },
-  ]);
-  const [input, setInput] = useState("");
+  const [selectedFriend, setSelectedFriend] = useState(null);
 
-  const send = () => {
-    if (!input.trim()) return;
-    setMessages((m) => [...m, { id: Date.now(), who: "user", text: input }]);
-    setInput("");
-    // TODO: call backend AI / neko assistant
-  };
+  if (selectedFriend) {
+    // Khi chọn bạn → hiện khung chat riêng
+    return (
+      <ChatRoom
+        friend={selectedFriend}
+        onBack={() => setSelectedFriend(null)}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#FFF9FB] pb-28">
-      <div className="max-w-md mx-auto p-4 flex flex-col h-screen">
-        <h2 className="text-xl font-semibold mb-4">Neko Sensei</h2>
+      <div className="max-w-md mx-auto p-4">
+        <h2 className="text-xl font-semibold mb-4">Chats</h2>
 
-        <div className="flex-1 overflow-auto space-y-3 mb-4">
-          {messages.map((m) => (
-            <div key={m.id} className={`max-w-[80%] ${m.who === "neko" ? "ml-0" : "ml-auto"} `}>
-              <div className={`${m.who === "neko" ? "bg-gray-100 text-gray-800" : "bg-pink-400 text-white"} py-3 px-4 rounded-2xl`}>
-                {m.text}
+        <div className="space-y-3">
+          {friends.map((f) => (
+            <button
+              key={f.id}
+              onClick={() => setSelectedFriend(f)}
+              className="flex items-center gap-3 w-full p-3 rounded-xl bg-white shadow hover:bg-pink-50 transition"
+            >
+              <img
+                src={f.avatar}
+                alt={f.name}
+                className="w-12 h-12 rounded-full object-cover"
+              />
+              <div className="text-left flex-1">
+                <p className="font-semibold">{f.name}</p>
+                <p className="text-gray-500 text-sm truncate">
+                  {f.lastMessage}
+                </p>
               </div>
-            </div>
+              {f.unread > 0 && (
+                <div className="bg-pink-500 text-white text-xs px-2 py-1 rounded-full">
+                  {f.unread}
+                </div>
+              )}
+            </button>
           ))}
-        </div>
-
-        <div className="flex gap-3 items-center">
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Type or say something..."
-            className="flex-1 px-4 py-3 rounded-xl border focus:ring-2 focus:ring-pink-300 outline-none"
-          />
-          <button onClick={send} className="bg-pink-500 text-white px-4 py-2 rounded-xl">Send</button>
         </div>
       </div>
 

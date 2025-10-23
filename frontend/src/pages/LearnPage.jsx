@@ -1,23 +1,105 @@
 // src/pages/Learn.jsx
-import React from "react";
+import React, { useState } from "react";
 import { lessons } from "../data/lessons";
 import LessonCard from "../components/LessonCard";
-import BottomNav from "../components/BottomNav";
 
 export default function LearnPage() {
-  return (
-    <div className="min-h-screen bg-[#FFF9FB] pb-28">
-      <div className="max-w-md mx-auto p-4">
-        <h2 className="text-xl font-semibold mb-4">Learn</h2>
+  const [activeTab, setActiveTab] = useState("learn");
+  const [selectedLevel, setSelectedLevel] = useState("N5");
 
-        <div className="grid grid-cols-2 gap-4">
-          {lessons.map((l) => (
-            <LessonCard key={l.id} lesson={l} />
+  const tabs = [
+    { id: "learn", label: "Học" },
+    { id: "review", label: "Ôn tập" },
+    { id: "challenge", label: "Thử thách" },
+  ];
+
+  const skills = [
+    { title: "Từ vựng", skill: "vocabulary", icon: "🈶" },
+    { title: "Ngữ pháp", skill: "grammar", icon: "📘" },
+    { title: "Đọc hiểu", skill: "reading", icon: "📖" },
+    { title: "Nghe hiểu", skill: "listening", icon: "🎧" },
+  ];
+
+  const levels = ["N5", "N4", "N3", "N2", "N1"];
+
+  const dataByTab = {
+    learn: lessons.filter((l) => l.type === "learn"),
+    review: lessons.filter((l) => l.type === "review"),
+    challenge: lessons.filter((l) => l.type === "challenge"),
+  };
+
+  return (
+    <div className="min-h-screen bg-[#FFF9FB] pb-20">
+      <div className="max-w-md mx-auto p-4">
+        {/* Header */}
+        <h2 className="text-2xl font-bold mb-6 text-center text-pink-500">
+          Neko Learning 🐾
+        </h2>
+
+        {/* Tabs */}
+        <div className="flex justify-around mb-6">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                activeTab === tab.id
+                  ? "bg-pink-500 text-white shadow-md"
+                  : "bg-gray-100 text-gray-600"
+              }`}
+            >
+              {tab.label}
+            </button>
           ))}
         </div>
-      </div>
 
-      <BottomNav />
+        {/* Chọn trình độ */}
+        <div className="flex justify-between mb-6">
+          {levels.map((lvl) => (
+            <button
+              key={lvl}
+              onClick={() => setSelectedLevel(lvl)}
+              className={`px-3 py-1 rounded-full font-medium text-sm transition ${
+                selectedLevel === lvl
+                  ? "bg-pink-500 text-white shadow-md"
+                  : "bg-gray-100 text-gray-600"
+              }`}
+            >
+              {lvl}
+            </button>
+          ))}
+        </div>
+
+        <h2 className="text-2xl font-bold text-center text-pink-600 mb-4">
+          Chọn kỹ năng 🐾
+        </h2>
+
+        {/* Hiển thị kỹ năng */}
+        <div className="grid grid-cols-2 gap-4">
+          {skills.map((s) => (
+            <LessonCard
+              key={s.skill}
+              title={s.title}
+              icon={s.icon}
+              level={selectedLevel}
+              skill={s.skill}
+            />
+          ))}
+        </div>
+
+        {/* Lessons
+        <div className="grid grid-cols-2 gap-4">
+          {dataByTab[activeTab]?.length > 0 ? (
+            dataByTab[activeTab].map((lesson) => (
+              <LessonCard key={lesson.id} lesson={lesson} />
+            ))
+          ) : (
+            <p className="text-gray-500 col-span-2 text-center mt-4">
+              Không có bài học nào 😿
+            </p>
+          )}
+        </div> */}
+      </div>
     </div>
   );
 }
