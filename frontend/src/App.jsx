@@ -9,6 +9,12 @@ import ProfilePage from "./pages/ProfilePage.jsx";
 import MainLayout from "./layouts/MainLayout.jsx";
 import LessonListPage from "./pages/LessonListPage.jsx";
 import NekoChatPage from "./pages/NekoChatPage.jsx";
+import FlashcardsPage from "./pages/FlashcardsPage.jsx";
+import ChatSupportPage from "./pages/ChatSupportPage.jsx";
+import FriendsPage from "./pages/FriendsPage.jsx";
+import HistoryPage from "./pages/HistoryPage.jsx";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
+import ManageLessonsPage from "./pages/ManageLessonsPage.jsx";
 
 function App() {
   return (
@@ -16,8 +22,14 @@ function App() {
       <Route element={<MainLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/learn" element={<LearnPage />} />
+        <Route path="/flashcards" element={<FlashcardsPage />} />
         <Route path="/pet" element={<PetZonePage />} />
         <Route path="/chat" element={<ChatPage />} />
+        <Route path="/chat/support" element={<ChatSupportPage />} />
+        <Route path="/friends" element={<FriendsPage />} />
+        <Route path="/history" element={<HistoryPage />} />
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/lessons" element={<ManageLessonsPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/learn/:skill" element={<LessonListPage />} />
       </Route>

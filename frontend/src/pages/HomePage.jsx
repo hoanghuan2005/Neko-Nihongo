@@ -1,6 +1,6 @@
 // src/pages/Home.jsx
 import React from "react";
-import BottomNav from "../components/BottomNav";
+// import BottomNav from "../components/BottomNav";
 
 export default function HomePage() {
   return (
@@ -8,7 +8,11 @@ export default function HomePage() {
       <div className="max-w-md mx-auto p-4">
         <header className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <img src="/assets/avatar.jpg" alt="avatar" className="w-10 h-10 rounded-full" />
+            <img
+              src="/assets/avatar.jpg"
+              alt="avatar"
+              className="w-10 h-10 rounded-full"
+            />
             <div>
               <div className="text-sm font-semibold">NekoNihongo</div>
               <div className="text-xs text-gray-500">Welcome back!</div>
@@ -21,22 +25,35 @@ export default function HomePage() {
         </header>
 
         <div className="bg-white rounded-2xl shadow p-3 mb-4">
-          <img src="/assets/cat1.jpg" alt="pet" className="w-full h-52 object-cover rounded-xl" />
+          <img
+            src="/assets/cat1.jpg"
+            alt="pet"
+            className="w-full h-52 object-cover rounded-xl"
+          />
           <div className="mt-3 flex items-center justify-between">
             <div>
               <div className="text-sm font-medium">Tama</div>
               <div className="text-xs text-gray-500">Mood: Happy</div>
             </div>
-            <div className="text-sm text-pink-500 font-semibold">Growth 75%</div>
+            <div className="text-sm text-pink-500 font-semibold">
+              Growth 75%
+            </div>
           </div>
           <div className="mt-3 h-2 bg-gray-100 rounded-full">
-            <div className="h-full bg-pink-400 rounded-full" style={{ width: "75%" }} />
+            <div
+              className="h-full bg-pink-400 rounded-full"
+              style={{ width: "75%" }}
+            />
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-3 mb-8">
-          <button className="bg-pink-500 text-white py-3 rounded-xl font-semibold shadow">Learn</button>
-          <button className="bg-white border border-pink-200 py-3 rounded-xl font-semibold">Pet</button>
+          <button className="bg-pink-500 text-white py-3 rounded-xl font-semibold shadow">
+            Learn
+          </button>
+          <button className="bg-white border border-pink-200 py-3 rounded-xl font-semibold">
+            Pet
+          </button>
         </div>
 
         <div className="bg-white rounded-2xl p-4 shadow">
@@ -45,7 +62,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <BottomNav />
+      {/* <BottomNav /> */}
     </div>
   );
 }

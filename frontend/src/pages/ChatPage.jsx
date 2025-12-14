@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { friends } from "../data/friends";
-import BottomNav from "../components/BottomNav";
+// import BottomNav from "../components/BottomNav";
 import ChatRoom from "./ChatRoom";
 
 export default function ChatPage() {
@@ -49,7 +49,7 @@ export default function ChatPage() {
         </div>
       </div>
 
-      <BottomNav />
+      {/* <BottomNav /> */}
     </div>
   );
 }

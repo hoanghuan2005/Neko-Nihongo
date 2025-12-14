@@ -12,7 +12,7 @@ const BottomNav = () => {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 dark:border-gray-200 flex justify-around py-2.5 shadow-md z-50">
+    <nav className="fixed bottom-0 left-0 right-0 bg-white/90 border-t border-skin-200 flex justify-around py-2.5 shadow-md z-50">
       {navItems.map((item) => (
         <NavLink
           key={item.to}
@@ -21,7 +21,7 @@ const BottomNav = () => {
             // Thêm các lớp transition và padding để hiệu ứng đẹp hơn
             `flex flex-col items-center text-xs transition-all duration-300 ease-in-out transform w-12 py-1 rounded-lg ${
               isActive
-                ? "text-white scale-105 -translate-y-1 bg-pink-400 shadow-md" // Hiệu ứng khi được chọn
+                ? "text-white scale-105 -translate-y-1 bg-warm-500 shadow-md" // Hiệu ứng khi được chọn
                 : "text-gray-500" // Trạng thái mặc định
             }`
           }
