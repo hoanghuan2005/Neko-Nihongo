@@ -13,8 +13,11 @@ import FlashcardsPage from "./pages/FlashcardsPage.jsx";
 import ChatSupportPage from "./pages/ChatSupportPage.jsx";
 import FriendsPage from "./pages/FriendsPage.jsx";
 import HistoryPage from "./pages/HistoryPage.jsx";
-import AdminDashboard from "./pages/AdminDashboard.jsx";
-import ManageLessonsPage from "./pages/ManageLessonsPage.jsx";
+import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
+import ManageLessonsPage from "./pages/admin/ManageLessons.jsx";
+import ManageUsers from "./pages/admin/ManageUsers.jsx";
+import CreateLesson from "./pages/admin/CreateLesson.jsx";
+import AdminRoute from "./routes/AdminRoute.jsx";
 
 function App() {
   return (
@@ -28,8 +31,12 @@ function App() {
         <Route path="/chat/support" element={<ChatSupportPage />} />
         <Route path="/friends" element={<FriendsPage />} />
         <Route path="/history" element={<HistoryPage />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/lessons" element={<ManageLessonsPage />} />
+        <Route element={<AdminRoute />}>
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/users" element={<ManageUsers />} />
+          <Route path="/admin/lessons" element={<ManageLessonsPage />} />
+          <Route path="/admin/create" element={<CreateLesson />} />
+        </Route>
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/learn/:skill" element={<LessonListPage />} />
       </Route>

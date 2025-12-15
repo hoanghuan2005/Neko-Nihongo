@@ -1,59 +1,114 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
-const LoginPage = () => {
+const SignupPage = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
-    // sau này bạn có thể gọi Supabase login API ở đây
-    if (email && password) {
-      console.log("Logging in with:", email, password);
-      navigate("/home");
-    } else {
-      alert("Please enter email and password");
+    if (!name || !email || !password) {
+      alert("Vui lòng điền đầy đủ thông tin");
+      return;
     }
+    if (password !== confirm) {
+      alert("Mật khẩu không khớp");
+      return;
+    }
+    // TODO: call Supabase sign up
+    navigate("/");
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gradient-to-br from-pink-300 via-purple-300 to-indigo-400">
-      <div className="bg-white/80 backdrop-blur-md p-8 mx-5 rounded-2xl shadow-lg w-96">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
-          NekoNihongo 🐾
-        </h1>
-        <form onSubmit={handleLogin} className="space-y-4">
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-pink-400 outline-none"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-pink-400 outline-none"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button
-            type="submit"
-            className="w-full py-2 bg-pink-500 text-white font-semibold rounded-lg hover:bg-pink-600 transition-all"
-          >
-            Login
-          </button>
-        </form>
-        <p className="text-center text-sm text-gray-600 mt-4">
-          Don't have an account?{" "}
-          <a href="#" className="text-pink-500 font-medium hover:underline">
-            Sign up
-          </a>
-        </p>
+    <div className="min-h-screen flex items-center justify-center bg-skin-50 px-4">
+      <div className="w-full max-w-4xl bg-white rounded-2xl shadow-lg grid grid-cols-1 md:grid-cols-2 overflow-hidden">
+        <div className="hidden md:flex items-center justify-center bg-warm-500 p-8">
+          <div className="text-white text-center">
+            <div className="text-4xl font-bold mb-2">Chào mừng!</div>
+            <p className="text-sm opacity-90">
+              Tạo tài khoản để bắt đầu hành trình học tiếng Nhật.
+            </p>
+            <div className="mt-6">
+              <img
+                src="/images/signup.jpg"
+                alt="signup"
+                className="w-40 h-40 rounded-lg object-cover shadow-lg mx-auto"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="p-8">
+          <h2 className="text-2xl font-semibold mb-1">Đăng ký</h2>
+          <p className="text-sm text-gray-500 mb-6">
+            Nhanh chóng, an toàn và miễn phí.
+          </p>
+
+          <form onSubmit={handleSignup} className="space-y-4">
+            <label className="block">
+              <span className="text-xs text-gray-600">Họ và tên</span>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="mt-1 block w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-warm-500"
+                required
+              />
+            </label>
+
+            <label className="block">
+              <span className="text-xs text-gray-600">Email</span>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="mt-1 block w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-warm-500"
+                required
+              />
+            </label>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <label className="block">
+                <span className="text-xs text-gray-600">Mật khẩu</span>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="mt-1 block w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-warm-500"
+                  required
+                />
+              </label>
+
+              <label className="block">
+                <span className="text-xs text-gray-600">Xác nhận mật khẩu</span>
+                <input
+                  type="password"
+                  value={confirm}
+                  onChange={(e) => setConfirm(e.target.value)}
+                  className="mt-1 block w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-warm-500"
+                  required
+                />
+              </label>
+            </div>
+
+            <button className="w-full py-2 bg-warm-500 text-white rounded-lg font-semibold hover:bg-warm-600 transition">
+              Tạo tài khoản
+            </button>
+          </form>
+
+          <div className="mt-4 text-sm text-gray-600">
+            Đã có tài khoản?{" "}
+            <Link to="/login" className="text-warm-600 font-medium">
+              Đăng nhập
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default SignupPage;

@@ -29,10 +29,10 @@ export default function LearnPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFF9FB] pb-20">
-      <div className="max-w-md mx-auto p-4">
+    <div className="min-h-screen bg-skin-50 pb-20">
+      <div className="max-w-6xl mx-auto p-6">
         {/* Header */}
-        <h2 className="text-2xl font-bold mb-6 text-center text-pink-500">
+        <h2 className="text-2xl font-bold mb-6 text-center text-warm-600">
           Neko Learning 🐾
         </h2>
 
@@ -54,7 +54,7 @@ export default function LearnPage() {
         </div>
 
         {/* Chọn trình độ */}
-        <div className="flex justify-between mb-6">
+        <div className="flex justify-between mb-6 flex-wrap gap-2">
           {levels.map((lvl) => (
             <button
               key={lvl}
@@ -70,12 +70,12 @@ export default function LearnPage() {
           ))}
         </div>
 
-        <h2 className="text-2xl font-bold text-center text-pink-600 mb-4">
+        <h2 className="text-2xl font-bold text-center text-warm-600 mb-4">
           Chọn kỹ năng 🐾
         </h2>
 
         {/* Hiển thị kỹ năng */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {skills.map((s) => (
             <LessonCard
               key={s.skill}

@@ -6,9 +6,9 @@ export default function Header({ onToggle }) {
   return (
     <header className="w-full bg-transparent border-b border-skin-200">
       <div className="W-full mx-auto flex items-center justify-between py-3 px-4">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           <button
-            className="p-2 rounded-lg hover:bg-white/60"
+            className="p-2 rounded-lg hover:bg-white/60 pl-3.5"
             onClick={onToggle}
           >
             <MenuIcon size={20} />
