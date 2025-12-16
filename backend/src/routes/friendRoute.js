@@ -13,9 +13,9 @@ router.get("/requests", getFriendRequests);
 
 router.post("/requests", sendFriendRequest);
 
-router.put("/requests/:requestId/accept", acceptFriendRequest);
+router.post("/requests/:requestId/accept", acceptFriendRequest);
 
-router.put("/requests/:requestId/reject", rejectFriendRequest);
+router.post("/requests/:requestId/reject", rejectFriendRequest);
 
 router.get("/all", getAllFriends);
 
