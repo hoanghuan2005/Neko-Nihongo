@@ -5,6 +5,7 @@ import lessonRoutes from "./routes/lessonsRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import friendRoutes from "./routes/friendRoute.js";
 import messageRoutes from "./routes/messageRoutes.js";
+import conversationRoutes from "./routes/conversationRoutes.js";
 import { requireAuth } from "./middleware/requireAuth.js";
 
 dotenv.config();
@@ -20,6 +21,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/friend", requireAuth, friendRoutes);
 
 app.use("/api/message", requireAuth, messageRoutes);
+
+app.use("/api/conversation", requireAuth, conversationRoutes);
 
 app.listen(process.env.PORT, () =>
   console.log(`🚀 Server running on port ${process.env.PORT}`)

@@ -1,8 +1,8 @@
-import { supabase } from "../config/db.js";
+import { supabaseAdmin } from "../config/db.js";
 
 // API ví dụ: lấy danh sách bài học
 export const getLessons = async (req, res) => {
-  const { data, error } = await supabase.from("lessons").select("*");
+  const { data, error } = await supabaseAdmin.from("lessons").select("*");
   if (error) return res.status(500).json({ error });
   return res.json(data);
 };
@@ -17,7 +17,7 @@ export const addLessons = async (req, res) => {
     }
 
     // Gửi dữ liệu vào Supabase
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from("lessons")
       .insert([{ title, description, level }])
       .select();
@@ -39,7 +39,7 @@ export const updateLessons = async (req, res) => {
       return res.status(400).json({ error: "Thiếu ID bài học cần cập nhật" });
     }
 
-    const { data: existingLesson, error: checkError } = await supabase
+    const { data: existingLesson, error: checkError } = await supabaseAdmin
       .from("lessons")
       .select("id")
       .eq("id", id)
@@ -53,7 +53,7 @@ export const updateLessons = async (req, res) => {
       return res.status(404).json({ error: "Không tìm thấy bài học" });
     }
 
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from("lessons")
       .update([{ title, description, level }])
       .eq("id", id)
@@ -78,7 +78,7 @@ export const deleteLessons = async (req, res) => {
       return res.status(400).json({ error: "Thiếu ID bài học cần xóa" });
     }
 
-    const { data: existingLesson, error: checkError } = await supabase
+    const { data: existingLesson, error: checkError } = await supabaseAdmin
       .from("lessons")
       .select("id")
       .eq("id", id)
@@ -92,7 +92,7 @@ export const deleteLessons = async (req, res) => {
       return res.status(404).json({ error: "Không tìm thấy bài học" });
     }
 
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from("lessons")
       .delete()
       .eq("id", id)

@@ -3,20 +3,14 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_KEY = process.env.SUPABASE_KEY;
+export const supabaseAdmin = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY
+);
 
-let supabase = null;
+export const supabaseAnon = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_ANON_KEY
+);
 
-try {
-  if (!SUPABASE_URL || !SUPABASE_KEY) {
-    throw new Error("Thiếu SUPABASE_URL hoặc SUPABASE_KEY trong .env");
-  }
-
-  supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-  console.log("Supabase connected successfully!");
-} catch (error) {
-  console.error("Supabase connection failed:", error.message);
-}
-
-export { supabase };
+console.log("Supabase clients ready");

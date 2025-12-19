@@ -1,42 +1,44 @@
-// import { supabase } from "../config/db.js";
+// Tính unread count động dựa trên last_seen_at
+export const getUnreadCount = async (supabase, conversationId, userId) => {
+  // Lấy last_seen_at của user trong conversation này
+  const { data: member, error: memberError } = await supabase
+    .from("conversation_members")
+    .select("last_seen_at")
+    .eq("conversation_id", conversationId)
+    .eq("user_id", userId)
+    .single();
 
-// // Tính unread count động dựa trên last_seen_at
-// export const getUnreadCount = async (conversationId, userId) => {
-//   // Lấy last_seen_at của user trong conversation này
-//   const { data: member, error: memberError } = await supabase
-//     .from("conversation_members")
-//     .select("last_seen_at")
-//     .eq("conversation_id", conversationId)
-//     .eq("user_id", userId)
-//     .single();
+  if (memberError) throw memberError;
+  if (!member) return 0;
 
-//   if (memberError) throw memberError;
-//   if (!member) return 0;
+  const lastSeenAt = member.last_seen_at || new Date(0).toISOString();
 
-//   const lastSeenAt = member.last_seen_at || new Date(0).toISOString();
+  // Đếm messages có created_at > last_seen_at
+  const { count, error: countError } = await supabase
+    .from("messages")
+    .select("*", { count: "exact", head: true })
+    .eq("conversation_id", conversationId)
+    .gt("created_at", lastSeenAt);
 
-//   // Đếm messages có created_at > last_seen_at
-//   const { count, error: countError } = await supabase
-//     .from("messages")
-//     .select("*", { count: "exact", head: true })
-//     .eq("conversation_id", conversationId)
-//     .gt("created_at", lastSeenAt);
+  if (countError) throw countError;
+  return count || 0;
+};
 
-//   if (countError) throw countError;
-//   return count || 0;
-// };
+// Cập nhật last_seen_at khi user xem conversation
+export const markConversationAsSeen = async (
+  supabase,
+  conversationId,
+  userId
+) => {
+  const now = new Date().toISOString();
+  const { error } = await supabase
+    .from("conversation_members")
+    .update({ last_seen_at: now })
+    .eq("conversation_id", conversationId)
+    .eq("user_id", userId);
 
-// // Cập nhật last_seen_at khi user xem conversation
-// export const markConversationAsSeen = async (conversationId, userId) => {
-//   const now = new Date().toISOString();
-//   const { error } = await supabase
-//     .from("conversation_members")
-//     .update({ last_seen_at: now })
-//     .eq("conversation_id", conversationId)
-//     .eq("user_id", userId);
-
-//   if (error) throw error;
-// };
+  if (error) throw error;
+};
 
 // export const updateConversationAfterCreateMessage = async (
 //   conversationId,

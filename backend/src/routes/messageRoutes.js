@@ -5,12 +5,14 @@ import {
   // getConversationUnreadCount,
   // markAsRead,
 } from "../controller/messageController.js";
+import { checkFriendship } from "../middleware/friendMiddleware.js";
+import { checkGroupMembership } from "../middleware/friendMiddleware.js";
 
 const router = express.Router();
 
-router.post("/direct", sendDirectMessage);
+router.post("/direct", checkFriendship, sendDirectMessage);
 
-router.post("/group", sendGroupMessage);
+router.post("/group", checkGroupMembership, sendGroupMessage);
 
 // router.get("/:conversationId/unread", getConversationUnreadCount);
 

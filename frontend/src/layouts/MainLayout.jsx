@@ -17,7 +17,7 @@ export default function MainLayout() {
       <Header onToggle={() => setSidebarOpen((prev) => !prev)} />
       <div className="min-h-screen flex flex-1">
         <Sidebar isExpanded={sideBarOpen} />
-        <main className="flex-1 p-4 md:p-8">
+        <main className="flex-1">
           <Outlet />
         </main>
       </div>

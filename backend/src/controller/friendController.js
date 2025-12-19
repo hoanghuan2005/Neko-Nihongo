@@ -1,4 +1,4 @@
-import { supabase } from "../config/db.js";
+import { supabaseAdmin } from "../config/db.js";
 
 export const sendFriendRequest = async (req, res) => {
   try {
@@ -20,7 +20,7 @@ export const sendFriendRequest = async (req, res) => {
     const a = fromUser < toUser ? fromUser : toUser;
     const b = fromUser < toUser ? toUser : fromUser;
 
-    const { data: existingFriend } = await supabase
+    const { data: existingFriend } = await supabaseAdmin
       .from("friends")
       .select("id")
       .eq("user_a", a)
@@ -32,7 +32,7 @@ export const sendFriendRequest = async (req, res) => {
     }
 
     // 2 gửi request
-    const { error } = await supabase.from("friend_requests").insert({
+    const { error } = await supabaseAdmin.from("friend_requests").insert({
       from_user: fromUser,
       to_user: toUser,
       message: message || null,
@@ -53,7 +53,7 @@ export const acceptFriendRequest = async (req, res) => {
     const { requestId } = req.params;
 
     // 1. Lấy request
-    const { data: request, error } = await supabase
+    const { data: request, error } = await supabaseAdmin
       .from("friend_requests")
       .select("*")
       .eq("id", requestId)
@@ -74,14 +74,14 @@ export const acceptFriendRequest = async (req, res) => {
     const userB =
       request.from_user < request.to_user ? request.to_user : request.from_user;
 
-    const { error: insertError } = await supabase
+    const { error: insertError } = await supabaseAdmin
       .from("friends")
       .insert({ user_a: userA, user_b: userB });
 
     if (insertError) throw insertError;
 
     // 3. Xóa request
-    await supabase.from("friend_requests").delete().eq("id", requestId);
+    await supabaseAdmin.from("friend_requests").delete().eq("id", requestId);
 
     return res.json({ message: "Đã chấp nhận lời mời kết bạn" });
   } catch (error) {
@@ -95,7 +95,7 @@ export const rejectFriendRequest = async (req, res) => {
     const userId = req.user.id;
     const { requestId } = req.params;
 
-    const { data: request } = await supabase
+    const { data: request } = await supabaseAdmin
       .from("friend_requests")
       .select("to_user")
       .eq("id", requestId)
@@ -109,7 +109,7 @@ export const rejectFriendRequest = async (req, res) => {
       return res.status(403).json({ error: "Không có quyền reject" });
     }
 
-    await supabase.from("friend_requests").delete().eq("id", requestId);
+    await supabaseAdmin.from("friend_requests").delete().eq("id", requestId);
 
     return res.json({ message: "Đã từ chối lời mời kết bạn" });
   } catch (error) {
@@ -122,7 +122,7 @@ export const getAllFriends = async (req, res) => {
   try {
     const userId = req.user.id;
 
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from("friends")
       .select("*")
       .or(`user_a.eq.${userId},user_b.eq.${userId}`);
@@ -144,7 +144,7 @@ export const getFriendRequests = async (req, res) => {
   try {
     const userId = req.user.id;
 
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from("friend_requests")
       .select("*")
       .eq("to_user", userId)

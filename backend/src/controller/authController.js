@@ -1,10 +1,10 @@
-import { supabase } from "../config/db.js";
+import { supabaseAnon } from "../config/db.js";
 
 // Đăng ký tài khoản
 export const signup = async (req, res) => {
   const { email, password } = req.body;
 
-  const { data, error } = await supabase.auth.signUp({ email, password });
+  const { data, error } = await supabaseAnon.auth.signUp({ email, password });
 
   if (error) return res.status(400).json({ error: error.message });
   res.status(200).json({ user: data.user });
@@ -14,7 +14,7 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
-  const { data, error } = await supabase.auth.signInWithPassword({
+  const { data, error } = await supabaseAnon.auth.signInWithPassword({
     email,
     password,
   });
@@ -37,7 +37,7 @@ export const login = async (req, res) => {
 
 // Đăng xuất
 export const logout = async (req, res) => {
-  const { error } = await supabase.auth.signOut();
+  const { error } = await supabaseAnon.auth.signOut();
   if (error) return res.status(400).json({ error: error.message });
 
   res.status(200).json({ message: "Logged out successfully" });
@@ -45,7 +45,7 @@ export const logout = async (req, res) => {
 
 // Lấy thông tin user hiện tại
 export const getUser = async (req, res) => {
-  const { data, error } = await supabase.auth.getUser();
+  const { data, error } = await supabaseAnon.auth.getUser();
 
   if (error) return res.status(400).json({ error: error.message });
   res.status(200).json({ user: data.user });
